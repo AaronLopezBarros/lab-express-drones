@@ -25,7 +25,7 @@ router.post('/drones/create', async (req, res, next) => {
     const createDrone = await Drone.create({name, propellers, maxSpeed})
     console.log(chalk.bgYellow(createDrone))
     res.redirect('/drones')
-    
+
   } catch(err){
     console.log(chalk.bgRed(err))
   }
