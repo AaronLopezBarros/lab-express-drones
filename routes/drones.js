@@ -1,6 +1,6 @@
 const express = require('express');
-const router = express.Router();
-
+const router  = express.Router();
+const chalk   = require('chalk')
 // require the Drone model here
 const Drone = require('../models/Drone.model')
 
@@ -21,9 +21,11 @@ router.get('/drones/create', (req, res, next) => {
 
 router.post('/drones/create', async (req, res, next) => {
   try{
-    const createDrone = await Drone.create(req.body)
-    console.log('ok')
-    res.send(createDrone)
+    const {name, propellers, maxSpeed} = req.body
+    const createDrone = await Drone.create({name, propellers, maxSpeed})
+    console.log(chalk.bgYellow(createDrone))
+    res.redirect('/drones')
+
   } catch(err){
     console.log(chalk.bgRed(err))
   }
